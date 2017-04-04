@@ -161,7 +161,7 @@ trait Parsers {
    *               phrase) and Some if tracking is enabled
    *  inner Option is None if NoSuccess hasn't been seen yet, Some otherwise
    * this is necessary to avoid leaking NoSuccesses in thread locals */
-  private lazy val lastNoSuccessVar = new DynamicVariable[Option[Option[NoSuccess]]](None)
+  private lazy val lastNoSuccessVar = new OptionDynamicVariable[Option[NoSuccess]]
 
   /** A common super-class for unsuccessful parse results. */
   sealed abstract class NoSuccess(val msg: String, override val next: Input) extends ParseResult[Nothing] { // when we don't care about the difference between Failure and Error
